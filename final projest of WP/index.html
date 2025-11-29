@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tournament Tracker India</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Poppins', sans-serif; }
+    .ticker {
+      overflow: hidden;
+      white-space: nowrap;
+      animation: ticker 15s linear infinite;
+    }
+    @keyframes ticker{
+      0% { transform: translateX(100%); }
+      100% { transform: translateX(-100%); }
+    }
+  </style>
+</head>
+
+<body class="bg-gray-50 text-gray-900">
+
+  <!-- Navbar -->
+  <nav class="bg-blue-600 text-white shadow-lg">
+    <div class="max-w-7xl mx-auto px-4 flex justify-between items-center h-16">
+      <h1 class="text-2xl font-bold">Tournament Tracker India</h1>
+      <ul class="hidden md:flex space-x-6">
+        <li><a href="index.html" class="hover:text-yellow-300">Home</a></li>
+        <li><a href="tournaments.html" class="hover:text-yellow-300">Tournaments</a></li>
+        <li><a href="gallery.html" class="hover:text-yellow-300">Gallery</a></li>
+        <li><a href="about.html" class="hover:text-yellow-300">About</a></li>
+        <li><a href="contact.html" class="hover:text-yellow-300">Contact</a></li>
+      </ul>
+      <button id="darkToggle" class="bg-black-400 text-black px-3 py-1 rounded-lg hover:bg-yellow-500">🌙</button>
+    </div>
+  </nav>
+
+  <!-- Breaking News Ticker -->
+  <div class="bg-red-600 text-white py-2 text-sm overflow-hidden">
+    <p class="ticker font-semibold">
+      🏏 India vs Australia Test Series announced! — ⚽ ISL Semi-finals this weekend! — 🏸 National Badminton League registrations open! — 🏆 Khelo India Youth Games 2025 updates coming soon!
+    </p>
+  </div>
+
+  <!-- Hero Section -->
+  <header class="text-center py-12 bg-gradient-to-r from-blue-500 to-blue-700 text-white">
+    <h2 class="text-4xl font-bold mb-4">Get the Latest Tournament News Across India</h2>
+    <p class="text-lg mb-6">Stay updated with sports events, schedules, and highlights from every corner of the country.</p>
+    <a href="tournaments.html" class="bg-yellow-400 text-black px-6 py-3 rounded-lg font-semibold hover:bg-yellow-500 transition">View All Tournaments</a>
+  </header>
+
+  <!-- Live Date/Time -->
+  <div class="text-center my-4">
+    <p id="datetime" class="text-sm text-gray-600"></p>
+  </div>
+
+  <!-- Featured Tournaments -->
+  <section class="max-w-7xl mx-auto px-4 py-8">
+    <h3 class="text-2xl font-semibold mb-6 text-center">Featured Tournaments</h3>
+    <div class="grid md:grid-cols-3 sm:grid-cols-2 gap-6">
+      
+      <div class="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition">
+        <img src="cricket.png" alt="Cricket" class="w-full h-48 object-cover">
+        <div class="p-4">
+          <h4 class="font-bold text-lg mb-2">Ranji Trophy 2025</h4>
+          <p class="text-gray-600 text-sm mb-3">Venue: Mumbai • Date: Jan–Mar 2025</p>
+          <a href="#" class="text-blue-600 hover:underline font-semibold">Read More →</a>
+        </div>
+      </div>
+
+      <div class="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition">
+        <img src="basketball.png" alt="Basketball" class="w-full h-48 object-cover">
+        <div class="p-4">
+          <h4 class="font-bold text-lg mb-2">Indian Super League</h4>
+          <p class="text-gray-600 text-sm mb-3">Venue: Pan India • Date: Feb–May 2025</p>
+          <a href="#" class="text-blue-600 hover:underline font-semibold">Read More →</a>
+        </div>
+      </div>
+
+      <div class="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition">
+        <img src="badminton.png" alt="Badminton" class="w-full h-48 object-cover ">
+        <div class="p-4">
+          <h4 class="font-bold text-lg mb-2">National Badminton League</h4>
+          <p class="text-gray-600 text-sm mb-3">Venue: Hyderabad • Date: March 2025</p>
+          <a href="#" class="text-blue-600 hover:underline font-semibold">Read More →</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-blue-700 text-white text-center py-6 mt-8">
+    <p>© 2025 Tournament Tracker India | All Rights Reserved</p>
+    <p class="text-sm mt-2">Follow us:
+      <a href="#" class="text-yellow-300 mx-1 hover:underline">Instagram</a> |
+      <a href="#" class="text-yellow-300 mx-1 hover:underline">Twitter</a> |
+      <a href="#" class="text-yellow-300 mx-1 hover:underline">YouTube</a>
+    </p>
+  </footer>
+
+  <script>
+    // 🕓 Live Date/Time
+    function updateTime() {
+      const now = new Date();
+      document.getElementById("datetime").innerText =
+        "📅 " + now.toLocaleDateString() + " | 🕒 " + now.toLocaleTimeString();
+    }
+    setInterval(updateTime, 1000);
+    updateTime();
+
+    // 🌙 Dark Mode Toggle
+    const toggle = document.getElementById("darkToggle");
+    toggle.addEventListener("click", () => {
+      document.body.classList.toggle("bg-gray-900");
+      document.body.classList.toggle("text-white");
+    });
+  </script>
+</body>
+</html>

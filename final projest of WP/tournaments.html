@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tournaments | Tournament Tracker India</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Poppins', sans-serif; }
+  </style>
+</head>
+
+<body class="bg-gray-50 text-gray-900">
+
+  <!-- Navbar -->
+  <nav class="bg-blue-600 text-white shadow-lg">
+    <div class="max-w-7xl mx-auto px-4 flex justify-between items-center h-16">
+      <h1 class="text-2xl font-bold">Tournament Tracker India</h1>
+      <ul class="hidden md:flex space-x-6">
+        <li><a href="index.html" class="hover:text-yellow-300">Home</a></li>
+        <li><a href="tournaments.html" class="hover:text-yellow-300">Tournaments</a></li>
+        <li><a href="gallery.html" class="hover:text-yellow-300">Gallery</a></li>
+        <li><a href="about.html" class="hover:text-yellow-300">About</a></li>
+        <li><a href="contact.html" class="hover:text-yellow-300">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Header -->
+  <header class="text-center py-8 bg-gradient-to-r from-blue-500 to-blue-700 text-white">
+    <h2 class="text-3xl font-bold mb-2">All India Tournaments</h2>
+    <p class="text-sm">Explore ongoing and upcoming tournaments across the country.</p>
+  </header>
+
+  <!-- Search + Filter -->
+  <section class="max-w-7xl mx-auto px-4 py-6">
+    <div class="flex flex-col md:flex-row justify-between items-center mb-6">
+      <input type="text" id="searchBar" placeholder="🔍 Search tournaments..." class="border border-gray-300 rounded-lg px-4 py-2 w-full md:w-1/3 mb-4 md:mb-0">
+      <div class="space-x-2">
+        <button class="filter-btn bg-blue-600 text-white px-3 py-1 rounded-lg" data-category="All">All</button>
+        <button class="filter-btn bg-gray-200 px-3 py-1 rounded-lg" data-category="Cricket">Cricket</button>
+        <button class="filter-btn bg-gray-200 px-3 py-1 rounded-lg" data-category="Football">Football</button>
+        <button class="filter-btn bg-gray-200 px-3 py-1 rounded-lg" data-category="Badminton">Badminton</button>
+        <button class="filter-btn bg-gray-200 px-3 py-1 rounded-lg" data-category="Kabaddi">Kabaddi</button>
+      </div>
+    </div>
+
+    <!-- Tournament Cards Container -->
+    <div id="tournamentList" class="grid md:grid-cols-3 sm:grid-cols-2 gap-6"></div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-blue-700 text-white text-center py-6 mt-8">
+    <p>© 2025 Tournament Tracker India | All Rights Reserved</p>
+  </footer>
+
+  <!-- JavaScript -->
+  <script>
+    const tournaments = [
+      {
+        name: "Ranji Trophy 2025",
+        category: "Cricket",
+        location: "Mumbai",
+        date: "Jan - Mar 2025",
+        img: "ranji_trophy2025.png"
+      },
+      {
+        name: "Indian Super League",
+        category: "Football",
+        location: "Pan India",
+        date: "Feb - May 2025",
+        img: "Indian_Super_League.png"
+      },
+      {
+        name: "National Badminton League",
+        category: "Badminton",
+        location: "Hyderabad",
+        date: "March 2025",
+        img: "National_Badminton_League.jpeg"
+      },
+      {
+        name: "Pro Kabaddi League",
+        category: "Kabaddi",
+        location: "Delhi",
+        date: "April 2025",
+        img: "kabaddi.png"
+      },
+      {
+        name: "All India University Games",
+        category: "Cricket",
+        location: "Chennai",
+        date: "May 2025",
+        img: "aiu.png"
+      },
+      {
+        name: "National Football Championship",
+        category: "Football",
+        location: "Goa",
+        date: "June 2025",
+        img: "nf.png "
+      }
+    ];
+
+    const container = document.getElementById("tournamentList");
+    const searchBar = document.getElementById("searchBar");
+    const filterButtons = document.querySelectorAll(".filter-btn");
+
+    function displayTournaments(list) {
+      container.innerHTML = "";
+      list.forEach(t => {
+        container.innerHTML += `
+          <div class="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition">
+            <img src="${t.img}" class="w-full h-48 object-cover" alt="${t.name}">
+            <div class="p-4">
+              <h4 class="font-bold text-lg mb-2">${t.name}</h4>
+              <p class="text-gray-600 text-sm mb-2">Category: ${t.category}</p>
+              <p class="text-gray-600 text-sm mb-3">📍 ${t.location} • 📅 ${t.date}</p>
+              <a href="#" class="text-blue-600 hover:underline font-semibold">Read More →</a>
+            </div>
+          </div>`;
+      });
+    }
+    displayTournaments(tournaments);
+    searchBar.addEventListener("input", e => {
+      const query = e.target.value.toLowerCase();
+      const filtered = tournaments.filter(t => t.name.toLowerCase().includes(query));
+      displayTournaments(filtered);
+    });
+    filterButtons.forEach(btn => {
+      btn.addEventListener("click", () => {
+        const category = btn.dataset.category;
+        filterButtons.forEach(b => b.classList.remove("bg-blue-600", "text-white"));
+        btn.classList.add("bg-blue-600", "text-white");
+        const filtered = category === "All" ? tournaments : tournaments.filter(t => t.category === category);
+        displayTournaments(filtered);
+      });
+    });
+  </script>
+</body>
+</html>
